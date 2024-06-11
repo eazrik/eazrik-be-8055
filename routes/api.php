@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\DokterController;
-use App\Http\Controllers\Api\ClinicController;
-use App\Http\Controllers\Api\PatientsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/antrian/now', [PatientsController::class, 'show']);
-Route::post('/antrian/take', [PatientsController::class, 'store']);
-Route::get('/antrian/total', [PatientsController::class, 'totalPatients']);
-Route::get('/pasien/search', [PatientsController::class, 'search']);
-Route::get('/clinic/detail', [ClinicController::class, 'detail']);
-Route::get('/dokter/detail', [DokterController::class, 'detail']);
+Route::post('movie-store', [MovieController::class, 'store']);
+Route::get('all-movies', [MovieController::class, 'allMovies']);
+Route::get('new-movies', [MovieController::class, 'newMovies']);
+Route::get('top-movies', [MovieController::class, 'topMovies']);
+Route::get('single-movie/{movie}', [MovieController::class, 'singleMovie']);
+Route::get('genre', [MovieController::class, 'genre']);
+Route::get('timeSlot', [MovieController::class, 'timeSlot']);
+Route::get('specificMovieTheatre', [MovieController::class, 'specificMovieTheatre']);
+Route::get('performer', [MovieController::class, 'performer']);
+Route::post('movie-update/{movie}', [MovieController::class, 'update']);
+Route::post('movie-rating/{movie}', [MovieController::class, 'rating']);
+Route::delete('movie-delete/{movie}', [MovieController::class, 'delete']);

@@ -185,14 +185,6 @@ Shut down Docker Cmpose environment and remove all of its containers, networks, 
 docker-compose down
 ```
 
-## Postman Export
-
-Automatically generate a Postman collection based on the API routes.
-Locate the collection at `storage/app/postman/`.
-```
-php artisan export:postman
-```
-
 Copy auth bearer token from column `api_token` inside `user` table.
 
 ## Other References
