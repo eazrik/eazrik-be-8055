@@ -1,0 +1,86 @@
+version: "3"
+services:
+  app:
+    build:
+      args:
+        user: development
+        uid: 9999
+      context: ./
+      dockerfile: Dockerfile
+    image: movie
+    container_name: movie-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - movie-net
+  
+  nginx:
+    image: nginx:1.23.0
+    container_name: movie-nginx
+    restart: unless-stopped
+    ports:
+      - 6010:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - movie-net
+
+  db:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: movie-db
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: movie
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+    ports:
+      - 6012:3306
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - movie-db:/var/lib/mysql
+    networks:
+      - movie-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5
+    restart: unless-stopped
+    links:
+      - db:db
+    ports:
+      - 6011:80
+    container_name: movie-phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+      UPLOAD_LIMIT: 100M
+    networks:
+      - movie-net
+
+  mailhog:
+    image: mailhog/mailhog
+    restart: unless-stopped
+    container_name: movie-mailhog
+    logging:
+      driver: none # disable saving logs
+    ports:
+      - 6013:1025 # smtp server
+      - 6014:8025
+    networks:
+      - movie-net
+
+networks:
+  movie-net:
+    name: movie-net
+    driver: bridge
+    attachable: true
+
+volumes:
+  movie-db:
+
