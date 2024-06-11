@@ -1,13 +1,12 @@
 # [Movie](https://add-me-here)
 
 ![version](https://img.shields.io/badge/version-0.0.1-blue.svg)
-![license](https://img.shields.io/badge/license-Arissa-red.svg)
 
 Laravel Movie API System
 
 ## Documentation
 
-Read full system [requirement](https://drive.google.com/file/d/1AXi0JLX44Vs_5t0F8fpWXgNnY26UtU0C/view).
+Read full system [soon]
 
 ## Port
 
@@ -31,7 +30,7 @@ Start the docker and follow below steps:
 
 1. In your terminal, clone `git` repository:
     ```
-    git clone git@github.com:repoarissa/jps.git
+    git clone git@github.com:eazrik/eazrik-be-8055.git
     ```
 
 2. Navigate to root project folder:
@@ -108,16 +107,16 @@ Start the docker and follow below steps:
     chmod -R 777 storage/framework && chmod -R 777 storage/app && chmod -R 777 public
     ```
 
-Now, open browser and access [movie](http://localhost:9010) server’s domain name on port 9010:
+Now, open browser and access [movie](http://localhost:6010) server’s domain name on port 6010:
 ```
-http://localhost:9010
+http://localhost:6010
 ```
 
 ## phpMyadmin
 
-Open [phpmyadmin](http://localhost:9011) login page from brower.
+Open [phpmyadmin](http://localhost:6011) login page from brower.
 ```
-http://localhost:9011
+http://localhost:6011
 
 Credential:-
 Username: user
@@ -128,7 +127,7 @@ Password: test
 
 Local SMTP testing server.
 ```
-SMTP_PORT = 9013
+SMTP_PORT = 6013
 ```
 
 To test the SMTP is running properly.
@@ -141,9 +140,9 @@ $ Mail::send('home', [], function($message) { $message->to('test@test.com')->sub
 ```
 
 This will send template ``home.blade.php``
-To view the sent email, browse to [http://localhost:9014](http://localhost:9014)
+To view the sent email, browse to [http://localhost:6014](http://localhost:6014)
 ```
-http://localhost:9014
+http://localhost:6014
 ```
 
 ## Docker References
